@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.neuedu.lvcity.dao.*;
-import com.neuedu.lvcity.domain.*;
+import com.neuedu.lvcity.model.*;
 import com.neuedu.lvcity.common.*;
 
 public class UserDaoImpl implements UserDao {

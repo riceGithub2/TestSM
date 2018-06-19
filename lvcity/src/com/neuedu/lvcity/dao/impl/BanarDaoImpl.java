@@ -10,8 +10,8 @@ import java.util.Map;
 
 import com.neuedu.lvcity.common.DBUtils;
 import com.neuedu.lvcity.dao.BanarDao;
-import com.neuedu.lvcity.domain.Banar;
-import com.neuedu.lvcity.domain.Users;
+import com.neuedu.lvcity.model.Banar;
+import com.neuedu.lvcity.model.Users;
 
 
 public class BanarDaoImpl implements BanarDao {

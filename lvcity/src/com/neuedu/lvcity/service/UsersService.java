@@ -1,7 +1,8 @@
 package com.neuedu.lvcity.service;
 
 import java.util.List;
-import com.neuedu.lvcity.domain.*;
+
+import com.neuedu.lvcity.model.*;
 
 public interface UsersService {
 	

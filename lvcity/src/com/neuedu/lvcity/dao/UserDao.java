@@ -2,7 +2,7 @@ package com.neuedu.lvcity.dao;
 
 import java.util.List;
 
-import com.neuedu.lvcity.domain.Users;
+import com.neuedu.lvcity.model.Users;
 
 public interface UserDao {
 	public int countUsers();

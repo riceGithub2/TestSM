@@ -21,7 +21,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONObject;
 
-import com.neuedu.lvcity.domain.Banar;
+import com.neuedu.lvcity.model.Banar;
 import com.neuedu.lvcity.service.BanarService;
 import com.neuedu.lvcity.service.impl.BanarServiceImpl;
 

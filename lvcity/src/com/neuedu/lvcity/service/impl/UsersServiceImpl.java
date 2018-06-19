@@ -3,11 +3,11 @@ package com.neuedu.lvcity.service.impl;
 import java.sql.Connection;
 import java.util.List;
 
-import com.neuedu.lvcity.domain.*;
 import com.neuedu.lvcity.service.UsersService;
 import com.neuedu.lvcity.common.*;
 import com.neuedu.lvcity.dao.*;
 import com.neuedu.lvcity.dao.impl.*;
+import com.neuedu.lvcity.model.*;
 
 public class UsersServiceImpl implements UsersService {
 	

@@ -10,8 +10,8 @@ import com.neuedu.lvcity.dao.BanarDao;
 import com.neuedu.lvcity.dao.UserDao;
 import com.neuedu.lvcity.dao.impl.BanarDaoImpl;
 import com.neuedu.lvcity.dao.impl.UserDaoImpl;
-import com.neuedu.lvcity.domain.Banar;
-import com.neuedu.lvcity.domain.Users;
+import com.neuedu.lvcity.model.Banar;
+import com.neuedu.lvcity.model.Users;
 import com.neuedu.lvcity.service.BanarService;
 import com.neuedu.lvcity.service.UsersService;
 

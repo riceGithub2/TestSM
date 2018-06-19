@@ -3,7 +3,7 @@ package com.neuedu.lvcity.service;
 import java.util.List;
 import java.util.Map;
 
-import com.neuedu.lvcity.domain.Banar;
+import com.neuedu.lvcity.model.Banar;
 
 public interface BanarService {
 	

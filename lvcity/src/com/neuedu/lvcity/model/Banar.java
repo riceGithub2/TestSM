@@ -1,4 +1,4 @@
-package com.neuedu.lvcity.domain;
+package com.neuedu.lvcity.model;
 
 public class Banar {
 	private int banarid;

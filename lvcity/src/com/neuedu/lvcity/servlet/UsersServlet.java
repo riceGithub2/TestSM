@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 import com.neuedu.lvcity.common.*;
-import com.neuedu.lvcity.domain.*;
+import com.neuedu.lvcity.model.*;
 import com.neuedu.lvcity.service.*;
 import com.neuedu.lvcity.service.impl.UsersServiceImpl;
 
