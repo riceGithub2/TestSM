@@ -64,16 +64,18 @@ public class UsersServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		//获取Service对象，并调用addUsers方法
 		UsersService userService = UsersServiceImpl.getInstance();
-		int result = userService.deleteUsers(id);
+		int resultTag = userService.deleteUsers(id);
 		
 		//result!=0表示增加用户成功
-		if(result != 0){
-			response.getWriter().write("sucess");			
+		if(resultTag != 0){
+			String result="success";
+			response.getWriter().write(result);		
+			response.getWriter().flush();
 			//查找所有的用户并且存到session中
 			List<Users> userList = userService.findAll();			  
 			se.setAttribute("userList", userList);	
 			//跳转至allUser.jsp页面，看到刚增加的新用户
-			response.sendRedirect(request.getContextPath()+ "/allUser.jsp");
+			response.sendRedirect(request.getContextPath()+ "/Admin/allUser.jsp");
 		}
 		
 	}
@@ -101,7 +103,7 @@ public class UsersServlet extends HttpServlet {
 				List<Users> userList = userService.findAll();			  
 				se.setAttribute("userList", userList);	
 				//跳转至allUser.jsp页面，看到刚增加的新用户
-				response.sendRedirect(request.getContextPath()+ "/allUser.jsp");
+				response.sendRedirect(request.getContextPath()+ "/Admin/allUser.jsp");
 			}
 	}
 
@@ -151,7 +153,7 @@ public class UsersServlet extends HttpServlet {
 				   //System.out.println(userList.size());
 				   se.setAttribute("userList", userList);
 					response.sendRedirect(request.getContextPath()
-							+ "/allUser.jsp");
+							+ "/Admin/index.jsp");
 				
 			}
 		}

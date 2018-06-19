@@ -1,9 +1,15 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <!DOCTYPE HTML>
 
 <html>
 
 <head>
+<base href="<%=basePath%>">
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
@@ -20,14 +26,56 @@
 <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
 
 <script type="text/javascript" src="js/jquery.SuperSlide.2.1.js"></script>
+	
+
+<script  type="text/javascript">
+//加入收藏
+
+function AddFavorite(sURL, sTitle) {
+
+    sURL = encodeURI(sURL); 
+try{  
+
+    window.external.addFavorite(sURL, sTitle);  
+
+}catch(e) {  
+
+    try{  
+
+        window.sidebar.addPanel(sTitle, sURL, "");  
+
+    }catch (e) {  
+
+        alert("加入收藏失败，请使用Ctrl+D进行添加,或手动在浏览器里进行设置.");
+
+    }  
+
+}
+
+}
+
+//设为首页
+
+function SetHome(url){
+
+if (document.all) {
+
+    document.body.style.behavior='url(#default#homepage)';
+
+      document.body.setHomePage(url);
+
+}else{
+
+    alert("您好,您的浏览器不支持自动设置页面为首页功能,请您手动在浏览器里设置该页面为首页!");
+
+}
+
+}
+</script>
 
 </head>
 
-
-
 <body>
-
-
 
 <!--header开始--> 
 
@@ -37,7 +85,10 @@
 
     	<p>你好，欢迎光临绿城之都南宁！</p>
 
-        <div class="contact"><a href="index.html">设为首页</a> <a href="index.html">加入收藏</a></div>
+        <div class="contact">
+	        <a onclick="SetHome(window.location)" href="javascript:void(0)">设为首页</a> 
+	        <a onclick="AddFavorite(window.location,document.title)" href="javascript:void(0)"  >加入收藏</a>
+        </div>
 
 	</div>
 
@@ -51,28 +102,28 @@
 
 	<div class="header_bottom">
 
-			<a href="index.html"><img src="images/logo.jpg" width="294" height="49" alt="" title="绿城之都-南宁"></a>
+			<a href="<%=basePath%>"><img src="images/logo.jpg" width="294" height="49" alt="" title="绿城之都-南宁"></a>
 
        		<ul>
 
-            	<li><a href="userindex.jsp">网站首页</a></li>       
 
+            	<li><a href="<%=basePath%>index/show.do">网站首页</a></li>       
 				<!-- 在页面上使用网站地址调用控制器的方法 -->
-                <li><a href="User/historic.jsp">历史</a></li>     
+                <li><a href="<%=basePath%>historic/show.do">历史</a></li>     
 
-                <li><a href="User/beautiful.jsp">风景</a></li>        
+                <li><a href="<%=basePath%>beautiful/yu.do">风景</a></li>        
 
-                <li><a href="User/tourism.jsp">旅游</a></li>      
+                <li><a href="<%=basePath%>tourism/showtourism.do">旅游</a></li>      
 
-                <li><a href="User/delicacy.jsp">美食</a></li>      
+                <li><a href="<%=basePath%>delicacy/show.do">美食</a></li>      
 
-                <li><a href="User/noticetype.jsp">动态</a></li>      
+                <li><a href="<%=basePath%>noticetype/show.do">动态</a></li>      
 
-                <li><a href="User/leave.jsp">留言</a></li>   
+                <li><a href="<%=basePath%>leave/huang.do">留言</a></li>   
 				
-				 <li><a href="User/team.jsp">团队介绍</a></li>      
+				 <li><a href="<%=basePath%>team/show.do">团队介绍</a></li>      
 
-                <li><a href="User/connection.jsp">联系我们</a></li>
+                <li><a href="<%=basePath%>connection/show.do">联系我们</a></li>
 
      		</ul>  
 
@@ -93,11 +144,12 @@
             <div class="bd">
 
                 <ul>
-
-                    <li style="background:url(images/banner_4.jpg) no-repeat center top;"></li>
-
-                    <li style="background:url(images/banner_2.jpg) no-repeat center top;"></li>
-
+					
+					<c:if test="${!empty banarList }">
+					<c:forEach items="${banarList}" var="banar">
+						<li style="background:url(${banar.image}) no-repeat center top;"></li>
+					</c:forEach>
+					</c:if>
                 </ul>
 
             </div>
@@ -133,104 +185,36 @@
 			<p class="p_tit1">走进南宁</p>	
 
 			<ul class="ul_jishu clearfix">
+				<c:if test="${!empty articleList }">
+					<c:forEach items="${articleList}" var="article">
+						<li class="fl ml10">
+							<a href="<%=basePath%>historic/look.do?aid=${article.aid}&pageNow=1"><img src="${article.image}" width="291" height="126" alt="" title=""></a>
+							<p>
+                    		<a href="<%=basePath%>historic/look.do?aid=${article.aid}&pageNow=1">${article.articlename}</a>
+                    		${article.content}
+                    		</p>
 
-            	<li class="fl">
-
-                	<a href="template/introduce.html"><img src="images/pic_1.jpg" width="291" height="126" alt="" title=""></a>
-
-<p>
-                    	<a href="template/introduce.html">南宁简介</a>
-                    南宁，简称“邕”，是广西壮族自治区首府，全区政治、经济、交通、科教文卫、金融和信息中心，是中国面向东盟开放合作的前沿城市、中国—东盟博览会永久举办地、北部湾经济区核心城市、国家“一带一路”有机衔接的重要门户城市。   </p>
-
-                </li>
-
-            	<li class="fl ml20">
-
-                	<a href="template/Culture.html"><img src="images/pic_2.jpg" width="291" height="126" alt="" title=""></a>
-
-<p>
-                    	<a href="template/Culture.html">南宁文化</a>
-                        南宁别称绿城、凤凰城、五象城。旅游资源丰富，北连桂林，南接北海，构成了广西的黄金旅游带。壮丽的边关风采、浪漫的海滩风貌、迷人的异国情调，星罗棋布的灵山秀水，古朴悠远的古迹故址，山、水、人、情构成南宁多层次的旅游景观。
-                    </p>
-
-                </li>
-
-                <li class="fr">
-
-                	<a href="template/historic.html"><img src="images/pic_3.jpg" width="291" height="126" alt="" title=""></a>
-
-<p>
-                    	<a href="template/historic.html">南宁历史</a>
-                       南宁历史悠久，在古代，南宁属于百越领地。秦始皇统一岭南地区后，南宁属于桂林郡。西汉时期，汉武帝又将它置于玉林郡管辖。东晋大兴元年（公元318年），置大兴郡，以南宁为郡治所在地，南宁建制从此开始，至今已有1600多年。</p>
-
-                </li>
-
+                		</li>
+					</c:forEach>
+				</c:if>
             </ul>	
 
 
+			<!-- 走进南宁图片 -->
             <div class="feilei">
-
-            	<div class="fl1 fldiv">
-
-                	<a href="#"><img src="images/pic_4.jpg" width="75" height="76" alt="" title=""></a>
-
-                    <p><a href="#">人民公园</a></p>
-
-                </div>
-
-                <div class="fl2 fldiv">
-
-                	<a href="#"><img src="images/pic_5.jpg" width="75" height="76" alt="" title=""></a>
-
-                    <p><a href="#">南宁海底世界</a></p>
-
-                </div>
-
-                <div class="fl3 fldiv">
-
-                	<a href="#"><img src="images/pic_6.jpg" width="75" height="76" alt="" title=""></a>
-
-                    <p><a href="#">金花茶公园</a></p>
-
-                </div>
-
-                <div class="fl4 fldiv">
-
-                	<a href="#"><img src="images/pic_7.jpg" width="75" height="76" alt="" title=""></a>
-
-                    <p><a href="#">五象广场</a></p>
-
-                </div>
-
-                <div class="fl5 fldiv">
-
-                	<a href="#"><img src="images/pic_8.jpg" width="75" height="76" alt="" title=""></a>
-
-                    <p><a href="#">地王云顶</a></p>
-
-                </div>
-
-                <div class="fl6 fldiv">
-
-                	<a href="#"><img src="images/pic_9.jpg" width="75" height="76" alt="" title=""></a>
-
-                    <p><a href="#">南宁民歌湖游船</a></p>
-
-                </div>
-
-                <div class="fl7 fldiv">
-
-                	<a href="#"><img src="images/pic_10.jpg" width="75" height="76" alt="" title=""></a>
-
-                    <p><a href="#">名树博览园</a></p>
-
-                </div>
-
+                <c:if test="${!empty scenicList }">
+					<c:forEach items="${scenicList}" var="scenic" varStatus="number">
+						<div class="fl${number.count } fldiv">
+		                	<a href="<%=basePath%>beautiful/look.do?aid=${scenic.aid}"><img src="${scenic.image }" width="75" height="76" alt="" title=""></a>
+		                    <p><a href="<%=basePath%>beautiful/look.do?aid=${scenic.aid}">${scenic.sname }</a></p>
+                		</div>
+					</c:forEach>
+				</c:if>
             </div>
 
             <div class="zjfc">
 
-            	<p class="p_tit1">秀丽南宁</p>
+            	<p class="p_tit1">美食南宁</p>
 
                 <div class="picScroll-left">
 
@@ -241,85 +225,23 @@
                         <a class="prev">></a>
 
                     </div>
-
+					
+					<!-- 美食南宁图片 -->
                     <div class="bd">
-
                         <ul class="picList">
-
-     
-
-                     
-
-
-                                             
-
-                   <li>
-
-                                <div class="pic"><img src="images/201410301619396038.jpg" width="231" height="151" /></div>
-
-                               
-
-                            </li>
-
-                                             
-
-                   <li>
-
-                                <div class="pic"><img src="images/201410301618110413.jpg" width="231" height="151" /></div>
-
-                                
-
-                            </li>
-
-                                             
-
-                   <li>
-
-                                <div class="pic"><img src="images/201410301611286194.jpg" width="231" height="151" /></div>
-
-                               
-
-                            </li>
-
-                                             
-
-                   <li>
-
-                                <div class="pic"><img src="images/201410301613498694.jpg" width="231" height="151" /></div>
-
-                               
-
-                            </li>
-
-                                             
-
-                   <li>
-
-                                <div class="pic"><img src="images/201410301614494319.jpg" width="231" height="151" /></div>
-
-                              
-
-                            </li>
-
-                                             
-
-                   <li>
-
-                                <div class="pic"><img src="images/201410301615449632.jpg" width="231" height="151" /></div>
-
-                            
-
-                            </li>
-
-                                             
-
-                        </ul>
-
+	                       <c:if test="${!empty foodList }">
+								<c:forEach items="${foodList}" var="food">
+									<li>
+										<a href="<%=basePath%>delicacy/look.do?aid=${food.aid}"><div class="pic"><img src="${food.image }" width="231" height="151" /></div></a>
+		                           	</li>
+								</c:forEach>
+							</c:if>
+						</ul>
                     </div>
 
                 </div>
 
-        		<!--为秀丽南宁模块图片向左滚到--> 
+        		<!--为美食南宁模块图片向左滚到--> 
 
                 <script type="text/javascript">
 
@@ -327,10 +249,6 @@
 
                 </script>
 			
-
-
-                	
-
             </div>
 
 		</div>
@@ -343,7 +261,7 @@
 
 <div class="footer"> 
 
-	<p><a href="index.html">首页</a> | <a href="template/historic.html">历史</a> | <a href="template/beautiful.html">风景</a> | <a href="template/tourism.html">旅游</a> | <a href="template/delicacy.html">美食</a> | <a href="template/new.html">动态</a> | <a href="template/leave.html">旅游</a>| <a href="template/connection.html">联系我们</a></p>
+	<p><a href="<%=basePath%>index/show.do">首页</a> | <a href="<%=basePath%>historic/show.do">历史</a> | <a href="<%=basePath%>beautiful/yu.do">风景</a> | <a href="<%=basePath%>tourism/showtourism.do">旅游</a> | <a href="<%=basePath%>delicacy/show.do">美食</a> | <a href="<%=basePath%>noticetype/show.do">动态</a> | <a href="<%=basePath%>leave/huang.do">留言</a>| <a href="<%=basePath%>connection/show.do">联系我们</a></p>
 
 <p>Copyright &copy; 2015－2016 All Rights Reserved 版权所有 XXXXXXXXXXXXXXXXXX</p>
   <p>地址：XXXXXXXXXXXXXXXXXX  来源:<a href="http://www.mycodes.net/" target="_blank">源码之家</a> </p>

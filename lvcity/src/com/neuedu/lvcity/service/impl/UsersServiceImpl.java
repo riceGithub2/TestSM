@@ -79,11 +79,12 @@ public class UsersServiceImpl implements UsersService {
 			try{
 				//调用数据库工具类的getConnection方法，取得数据库连接对象，并赋值给数据库连接对象变量
 				conn = DBUtils.getConnection();
+				DBUtils.beginTransaction(conn);
 				//创建userDao的实现类对象
 				UserDao userDao = new UserDaoImpl(conn);
 				//调用dao中的selectAll方法，进行数据库查询操作，结果赋值给查询结果变量
 				result = userDao.addUsers(u);			
-			
+			    DBUtils.commit(conn);
 			} catch (Exception e) {
 				//将异常封装成自定义异常并抛出
 				throw new ServiceException("查询所有用户错误", e);
@@ -111,11 +112,12 @@ public class UsersServiceImpl implements UsersService {
 		try{
 			//调用数据库工具类的getConnection方法，取得数据库连接对象，并赋值给数据库连接对象变量
 			conn = DBUtils.getConnection();
+			DBUtils.beginTransaction(conn);
 			//创建userDao的实现类对象
 			UserDao userDao = new UserDaoImpl(conn);
 			//调用dao中的selectAll方法，进行数据库查询操作，结果赋值给查询结果变量
 			result = userDao.deleteUsers(id);			
-		
+		    DBUtils.commit(conn);
 		} catch (Exception e) {
 			//将异常封装成自定义异常并抛出
 			throw new ServiceException("删除用户错误", e);

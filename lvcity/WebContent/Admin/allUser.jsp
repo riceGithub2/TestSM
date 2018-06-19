@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <!--  <% out.print(basePath); %>-->
   <%  HttpSession se = request.getSession();
       List userList = (List)se.getAttribute("usersList"); %>
-    <h6><a href="addUser.jsp">添加用户</a></h6>
+    <h6><a href="Admin/addUser.jsp">添加用户</a></h6>
 	<table border="1">
 		<tbody>
 			<tr>
@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>${user.age }</td>	
 						
 						<td>
-							<a href="<%=basePath%>editUser.jsp?id=${user.id}">编辑</a>
+							<a href="<%=basePath%>Admin/editUser.jsp?id=${user.id}">编辑</a>
 							<a href="javascript:del('${user.id }')">删除</a>
 						</td>
 					</tr>				

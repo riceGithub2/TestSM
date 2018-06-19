@@ -8,6 +8,7 @@
 <html>
 
 <head>
+<base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>JQuery easyui demo</title>
 
@@ -60,56 +61,56 @@
 				<div title="bannar广告管理" data-options="iconCls:'icon-save',selected:true"
 					style="overflow: auto; padding: 10px;">
 					<a  href="javascript:void(0);" class="easyui-linkbutton"
-						data-options="plain:true" onclick="open_menu('banar广告管理','banar.jsp')">banar广告管理</a><br/>
+						data-options="plain:true" onclick="open_menu('banar广告管理','Admin/Banar?action=findAllBanar')">banar广告管理</a><br/>
 				</div>
 				
 				<div title="文章管理" data-options="iconCls:'icon-save',selected:true"
 					style="overflow: auto; padding: 10px;">
 					<a  href="javascript:void(0);" class="easyui-linkbutton"
-						data-options="plain:true" onclick="open_menu('文章类型管理','articletype.jsp')">文章类型管理</a><br/>
+						data-options="plain:true" onclick="open_menu('文章类型管理','Admin/articletype.jsp')">文章类型管理</a><br/>
 					<a  href="javascript:void(0);" class="easyui-linkbutton"
-						data-options="plain:true" onclick="open_menu('文章管理','article.jsp')">历史文章管理</a>
+						data-options="plain:true" onclick="open_menu('文章管理','Admin/article.jsp')">历史文章管理</a>
 				</div>
 				
 				<div title="风景旅游管理" data-options="iconCls:'icon-save'"
 					style="overflow: auto; padding: 10px;">
 					<a  href="javascript:void(0);" class="easyui-linkbutton"
-						data-options="plain:true" onclick="open_menu('风景旅游类型管理','scenictype.jsp')">风景旅游类型管理</a><br/>
+						data-options="plain:true" onclick="open_menu('风景旅游类型管理','Admin/scenictype.jsp')">风景旅游类型管理</a><br/>
 					<a  href="javascript:void(0);" class="easyui-linkbutton"
-						data-options="plain:true" onclick="open_menu('风景旅游管理','scenicart.jsp')">风景旅游管理</a>
+						data-options="plain:true" onclick="open_menu('风景旅游管理','Admin/scenicart.jsp')">风景旅游管理</a>
 				</div>
 				
 				<div title="美食管理" data-options="iconCls:'icon-save'"
 					style="overflow: auto; padding: 10px;">
 					<a  href="javascript:void(0);" class="easyui-linkbutton"
-						data-options="plain:true" onclick="open_menu('美食类型管理','foodtype.jsp')">美食类型管理</a><br/>
+						data-options="plain:true" onclick="open_menu('美食类型管理','Admin/foodtype.jsp')">美食类型管理</a><br/>
 					<a  href="javascript:void(0);" class="easyui-linkbutton"
-						data-options="plain:true" onclick="open_menu('美食管理','food.jsp')">美食管理</a>
+						data-options="plain:true" onclick="open_menu('美食管理','Admin/food.jsp')">美食管理</a>
 				</div>
 				
 				<div title="动态新闻管理" data-options="iconCls:'icon-save'"
 					style="overflow: auto; padding: 10px;">
 					<a  href="javascript:void(0);" class="easyui-linkbutton"
-						data-options="plain:true" onclick="open_menu('动态新闻类型管理','noticetype.jsp')">动态新闻类型管理</a><br/>
+						data-options="plain:true" onclick="open_menu('动态新闻类型管理','Admin/noticetype.jsp')">动态新闻类型管理</a><br/>
 					<a  href="javascript:void(0);" class="easyui-linkbutton"
-						data-options="plain:true" onclick="open_menu('动态新闻管理','notice.jsp')">动态新闻管理</a>
+						data-options="plain:true" onclick="open_menu('动态新闻管理','Admin/notice.jsp')">动态新闻管理</a>
 				</div>
 				
 				<div title="团队留言管理" data-options="iconCls:'icon-save'"
 					style="overflow: auto; padding: 10px;">
 					<a  href="javascript:void(0);" class="easyui-linkbutton"
-						data-options="plain:true" onclick="open_menu('团队介绍管理','team.jsp')">团队介绍管理</a><br/>
+						data-options="plain:true" onclick="open_menu('团队介绍管理','Admin/team.jsp')">团队介绍管理</a><br/>
 						
 					<a  href="javascript:void(0);" class="easyui-linkbutton"
-						data-options="plain:true" onclick="open_menu('联系方式管理','contact.jsp')">联系方式管理</a><br/>
+						data-options="plain:true" onclick="open_menu('联系方式管理','Admin/contact.jsp')">联系方式管理</a><br/>
 					<a  href="javascript:void(0);" class="easyui-linkbutton"
-						data-options="plain:true" onclick="open_menu('留言管理','message.jsp')">留言管理</a>
+						data-options="plain:true" onclick="open_menu('留言管理','Admin/message.jsp')">留言管理</a>
 				</div>
 				
 				<div title="后台用户管理" data-options="iconCls:'icon-save'"
 					style="overflow: auto; padding: 10px;">
 					<a  href="javascript:void(0);" class="easyui-linkbutton"
-						data-options="plain:true" onclick="open_menu('后台用户管理','users.jsp')">后台用户管理</a><br/>
+						data-options="plain:true" onclick="open_menu('后台用户管理','Admin/users.jsp')">后台用户管理</a><br/>
 				</div>
 				<div title="退出系统" data-options="iconCls:'icon-save'"
 					style="overflow: auto; padding: 10px;">

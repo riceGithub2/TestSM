@@ -1,10 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java"  import="java.util.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,18 +29,29 @@
 	
 </head>
 <body>
+  <!--  <% out.print(basePath); %>-->
+  <%  HttpSession se = request.getSession();
+      List banarList = (List)se.getAttribute("banarList"); %>
 	<table id="banar_dg" class="easyui-datagrid" style="height: 670px;"
 		url="banar/findAllBanar.do" toolbar="#banar_toolbar" pagination="true"
 		rownumbers="true" fitColumns="true" singleSelect="true"
 		data-options="fit:false,border:false,pageSize:20,pageList:[5,10,15,20]">
 		<thead>
 			<tr>
-
 				<th field="banarid" width="50">编号</th>
 				<th field="image" width="50">图片</th>
 				<th field="state" width="50">状态</th>
-			</tr>
-		</thead>
+			</tr>			
+		</thead>	
+		<c:if test="${!empty banarList }">
+				<c:forEach items="${banarList}" var="banar">
+					<tr>
+						<td>${banar.banarid }</td>
+						<td>${banar.image }</td>	
+						<td>${banar.state }</td>	
+					</tr>				
+				</c:forEach>
+			</c:if>			
 	</table>
 	<div id="banar_toolbar">
 		<a href="javascript:void(0)" class="easyui-linkbutton"
@@ -125,7 +138,7 @@
 			document.getElementById('xmTanImg').src = '';
 			$('#banar_dlg').dialog('open').dialog('setTitle', '新增');
 			$('#banar_fm').form('clear');
-			url = 'banar/addBanar.do';
+			url = 'Admin/Banar?action=addBanar';
 		}
 		function editBanar() {
 			var imageinput = document.getElementsByName('image');
@@ -135,7 +148,7 @@
 			if (row) {
 				$('#banar_dlg').dialog('open').dialog('setTitle', '编辑');
 				$('#banar_fm').form('load', row);
-				url = 'banar/updateBanar.do?banarid=' + row.banarid;
+				url = 'Admin/Banar?action=updateBanar&?banarid=' + row.banarid;
 			}
 		}
 		function saveBanar() {
@@ -163,11 +176,12 @@
 			if (row) {
 				$.messager.confirm('Confirm', '确定要删除吗?', function(r) {
 					if (r) {
-						$.post('banar/deleteBanar.do', {
+						$.post('Admin/Banar?action=delBanar', {
 							banarid : row.banarid
 						}, function(result) {
 							if (result.success) {
-								$('#banar_dg').datagrid('reload'); // reload the banar data
+								//$('#banar_dg').datagrid('clearSelections');
+								$('#banar_dg').datagrid('reload'); // reload the banar data								
 							} else {
 								$.messager.show({ // show error message
 									title : 'Error',

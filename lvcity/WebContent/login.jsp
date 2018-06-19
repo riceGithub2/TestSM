@@ -7,7 +7,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-   <base href="<%=basePath%>"> 
     
     <title>登录页面</title>
     
@@ -48,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</table>
 			</td>
 			<td>
-			<img style="width:80px;" src="images/ihead.png"/>
+			<img style="width:80px;" src="images/head.png"/>
 			</td>
 			</tr>			
 		</table>
