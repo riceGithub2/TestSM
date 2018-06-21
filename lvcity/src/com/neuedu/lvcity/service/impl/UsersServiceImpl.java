@@ -47,8 +47,7 @@ public class UsersServiceImpl implements UsersService {
 					users = userDao.findAll();			
 				
 				} catch (Exception e) {
-					//将异常封装成自定义异常并抛出
-					throw new ServiceException("查询所有用户错误", e);
+					System.out.println("查询所有User错误"+e.getMessage());
 				} finally {
 					//调用数据库工具类的closeConnection方法，关闭连接
 					DBUtils.closeConnection(conn);
@@ -86,8 +85,7 @@ public class UsersServiceImpl implements UsersService {
 				result = userDao.addUsers(u);			
 			    DBUtils.commit(conn);
 			} catch (Exception e) {
-				//将异常封装成自定义异常并抛出
-				throw new ServiceException("查询所有用户错误", e);
+				System.out.println("增加User错误"+e.getMessage());
 			} finally {
 				//调用数据库工具类的closeConnection方法，关闭连接
 				DBUtils.closeConnection(conn);
@@ -119,8 +117,7 @@ public class UsersServiceImpl implements UsersService {
 			result = userDao.deleteUsers(id);			
 		    DBUtils.commit(conn);
 		} catch (Exception e) {
-			//将异常封装成自定义异常并抛出
-			throw new ServiceException("删除用户错误", e);
+			System.out.println("删除User错误"+e.getMessage());
 		} finally {
 			//调用数据库工具类的closeConnection方法，关闭连接
 			DBUtils.closeConnection(conn);
@@ -145,7 +142,7 @@ public class UsersServiceImpl implements UsersService {
 			//DBUtils.commit(conn);
 		} catch (Exception e) {
 			DBUtils.rollback(conn);
-			throw new ServiceException("查询用户错误", e);
+			System.out.println("登录查询User错误"+e.getMessage());
 		} finally {
 			DBUtils.closeConnection(conn);
 		}

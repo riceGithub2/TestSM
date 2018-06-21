@@ -142,16 +142,11 @@ public class UsersServlet extends HttpServlet {
 		// 检查用户是否存在
 		Users dbUser = userService.login(user.getName(),
 					user.getPasswd());
-			if (dbUser == null) {
-				/*msg = "用户名或密码错误";
-				request.setAttribute("msg", msg);*/
+			if (dbUser == null) {				
 				request.getRequestDispatcher("/login.jsp").forward(request,
 						response);
-			} else {
-				   
-				    List<Users> userList = userService.findAll();
-				   //System.out.println(userList.size());
-				   se.setAttribute("userList", userList);
+			} else {				 
+				   se.setAttribute("user", dbUser);
 					response.sendRedirect(request.getContextPath()
 							+ "/Admin/index.jsp");
 				

@@ -61,7 +61,7 @@
 				<div title="bannar广告管理" data-options="iconCls:'icon-save',selected:true"
 					style="overflow: auto; padding: 10px;">
 					<a  href="javascript:void(0);" class="easyui-linkbutton"
-						data-options="plain:true" onclick="open_menu('banar广告管理','Admin/Banar?action=findAllBanar')">banar广告管理</a><br/>
+						data-options="plain:true" onclick="open_menu('banar广告管理','Admin/banar.jsp')">banar广告管理</a><br/>
 				</div>
 				
 				<div title="文章管理" data-options="iconCls:'icon-save',selected:true"
@@ -125,7 +125,7 @@
 			<div id="tt" class="easyui-tabs" fit=true>
 				<div title="首页" style="text-align: center; font-size: 24px;">
 					<img alt="logo" src="images/logo.png" style="margin-left:150px;"><br/>
-					<a href="userindex.jsp" target="new" style="color:blue;text-decoration:none;">点击进入前台页面</a>
+					<a href="http://localhost:8888/lvcityFG" target="new" style="color:blue;text-decoration:none;">点击进入前台页面</a>
 				</div>
 			</div>
 		</div>

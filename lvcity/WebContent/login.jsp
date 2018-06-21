@@ -33,8 +33,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		//request.removeAttribute("message");
 		 %>
-  <body >
-	<div id="login" class="easyui-window" style="padding-top: 5px;padding-left: 15px" >
+  <body style=”width:100%;height:100%;">
+	<div id="login" class="easyui-window" style="padding-top: 50px;padding-left: 15px">
 		<form id="loginForm" action='Admin/User?action=login' method="post">
 		<table>
 		<tr>

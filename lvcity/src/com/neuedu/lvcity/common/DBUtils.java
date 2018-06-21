@@ -6,10 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+
 
 /**
  * 数据库工具类
@@ -24,17 +21,24 @@ public class DBUtils {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/ssmdb";
+			String url = "jdbc:mysql://localhost:3306/lvcitydb";
 			String user = "root";
-			String password = "";
+			String password ="";
 			conn = DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			throw new ServiceException("Can not get connection", e);
+			System.out.println("获取数据库连接异常"+e.getMessage());
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			throw new ServiceException("Can not get connection", e);
+			System.out.println("获取数据库连接异常"+e.getMessage());
 		}
+		
+	/*	         1.加载jdbc驱动
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				//2.定义连接url
+				String url = "jdbc:oracle:thin:@localhost:1521:neuedu";
+				//3.获取数据库连接    
+				Connection conn = DriverManager.getConnection(url,"scott","tiger");*/
 		
 		/*try {
 			Context context = new InitialContext();
@@ -62,7 +66,7 @@ public class DBUtils {
 		try {
 			conn.setAutoCommit(false);
 		} catch (SQLException e) {
-			throw new ServiceException("Can not begin transaction", e);
+			System.out.println("开启事务异常"+e.getMessage());
 		}
 	}
 
@@ -76,7 +80,7 @@ public class DBUtils {
 			conn.commit();
 			conn.setAutoCommit(true);
 		} catch (SQLException e) {
-			throw new ServiceException("Can not commit transaction", e);
+			System.out.println("关闭事务异常"+e.getMessage());
 		}
 	}
 
@@ -90,7 +94,7 @@ public class DBUtils {
 			conn.rollback();
 			conn.setAutoCommit(true);
 		} catch (SQLException e) {
-			throw new ServiceException("Can not rollback transaction", e);
+			System.out.println("回滚事务异常"+e.getMessage());
 		}
 	}
 
@@ -105,7 +109,7 @@ public class DBUtils {
 				conn.close();
 			}
 		} catch (SQLException e) {
-			throw new ServiceException("Can not close connection", e);
+			System.out.println("关闭连接异常"+e.getMessage());
 		}
 	}
 
@@ -123,7 +127,7 @@ public class DBUtils {
 				stmt.close();
 			}
 		} catch (SQLException e) {
-			throw new ServiceException("Can not close statement", e);
+			System.out.println("关闭语句或结果集异常"+e.getMessage());
 		}
 	}
 }

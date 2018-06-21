@@ -19,43 +19,49 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.json.simple.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 
 import com.neuedu.lvcity.model.Banar;
 import com.neuedu.lvcity.service.BanarService;
 import com.neuedu.lvcity.service.impl.BanarServiceImpl;
 
-
 public class BanarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public BanarServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public BanarServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+
 		String action = request.getParameter("action");
 		if ("findAllBanar".equals(action)) {
 			dofindAllBanar(request, response);
 		} else if ("addBanar".equals(action)) {
 			doAddBanar(request, response);
-		}else if ("delBanar".equals(action)) {
+		} else if ("delBanar".equals(action)) {
 			doDelBanar(request, response);
 		}
 	}
@@ -75,100 +81,117 @@ public class BanarServlet extends HttpServlet {
 			map.put("success", false);
 			map.put("errorMsg", "delete contact fail !!!");
 		}
-		
+
 		String str = JSONObject.toJSONString(map);
-		response.getWriter().write(str);	
-		
+		response.getWriter().write(str);
+
 	}
 
-	private void doAddBanar(HttpServletRequest request, HttpServletResponse response) throws IOException  {
-		   //获取session
-        HttpSession se = request.getSession();
+	private void doAddBanar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 获取session
+		HttpSession se = request.getSession();
 		// 调用Service方法
 		BanarService banarService = BanarServiceImpl.getInstance();
-		 
-		     //上传文件的目录 
-		       // String path = request.getSession().getServletContext().getRealPath("/")+"images";
-		     // String path= System.getProperty("catalina.home") + "\\webapps\\greencity\\images\\";
-		     String path = "G:\\1东软资料\\1广技师学院\\Git本地仓库\\lvcity\\WebContent\\images";
-		        File savePath = new File(path);
-				  //检查我们是否有文件上传请求
-			    boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-			    //1,声明DiskFileItemFactory工厂类，用于在指定磁盘上设置一个临时目录
-			    DiskFileItemFactory disk = new DiskFileItemFactory(1024*10,savePath);
-			    //2,声明ServletFileUpload，接收上边的临时文件。也可以默认值
-			    ServletFileUpload up = new ServletFileUpload(disk);
-			 
-					try {
-						   //3,解析request			   
-				        List<FileItem> list;
-						list = up.parseRequest(request);
-						  //如果就一个文件，
-				        FileItem file = list.get(0);
-				        //获取文件名：
-				        String fileName = file.getName();
-				        //获取文件的类型：
-				        String fileType = file.getContentType();
-				        //获取文件的字节码：
-				        InputStream in = file.getInputStream();
-				        //文件大小
-				        int size = file.getInputStream().available();
-				        //声明输出字节流
-				        OutputStream out = new FileOutputStream(new File(savePath+"/"+fileName));
-				        //文件copy
-				        byte[] b = new byte[1024];
-				        int len = 0;
-				        while((len=in.read(b))!=-1){
-				            out.write(b, 0, len);
-				        }
-				        out.flush(); 
-				        out.close();
-				        
-				        //删除上传生成的临时文件
-				        file.delete();
-		        
-					        
-					        int result = banarService.addBanar("images/"+fileName);
-					        Map<String, Object> map = new HashMap<String, Object>();
-							if (result > 0) {								
-								map.put("success", true);
-							}else {
-								map.put("success", false);
-								map.put("errorMsg", "Save user fail !");
-							}
-							
 
-							String str = JSONObject.toJSONString(map);
-							response.getWriter().write(str);
-						
-					} catch (FileUploadException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-			      		
-			   		
-		  }
+		// 上传文件的目录
+		// String path =
+		// request.getSession().getServletContext().getRealPath("/")+"images";
+		// String path= System.getProperty("catalina.home") +
+		// "\\webapps\\greencity\\images\\";
+		String path = "G:\\1东软资料\\1广技师学院\\Git本地仓库\\lvcity\\WebContent\\images";
+		File savePath = new File(path);
+		// 检查我们是否有文件上传请求
+		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		// 1,声明DiskFileItemFactory工厂类，用于在指定磁盘上设置一个临时目录
+		DiskFileItemFactory disk = new DiskFileItemFactory(1024 * 10, savePath);
+		// 2,声明ServletFileUpload，接收上边的临时文件。也可以默认值
+		ServletFileUpload up = new ServletFileUpload(disk);
 
-	private void dofindAllBanar(HttpServletRequest request, HttpServletResponse response) throws IOException {		
-		   //获取session
-        HttpSession se = request.getSession();
-		// 调用Service方法
-		BanarService banarService = BanarServiceImpl.getInstance();
-		List<Banar> banars = null;
-		// 查询所有用户
-		banars = banarService.findAllBanar();
-			
-		if(banars != null) {	  
-				
-	   //  System.out.println(banars.size());
-		 se.setAttribute("banarList", banars);
-		 response.sendRedirect(request.getContextPath()
-							+ "/Admin/banar.jsp");
-				
+		try {
+			// 3,解析request
+			List<FileItem> list;
+			list = up.parseRequest(request);
+			// 如果就一个文件，
+			FileItem file = list.get(0);
+			// 获取文件名：
+			String fileName = file.getName();
+			// 获取文件的类型：
+			String fileType = file.getContentType();
+			// 获取文件的字节码：
+			InputStream in = file.getInputStream();
+			// 文件大小
+			int size = file.getInputStream().available();
+			// 声明输出字节流
+			OutputStream out = new FileOutputStream(new File(savePath + "/" + fileName));
+			// 文件copy
+			byte[] b = new byte[1024];
+			int len = 0;
+			while ((len = in.read(b)) != -1) {
+				out.write(b, 0, len);
 			}
+			out.flush();
+			out.close();
+
+			// 删除上传生成的临时文件
+			file.delete();
+
+			int result = banarService.addBanar("images/" + fileName);
+			Map<String, Object> map = new HashMap<String, Object>();
+			if (result > 0) {
+				map.put("success", true);
+			} else {
+				map.put("success", false);
+				map.put("errorMsg", "Save user fail !");
+			}
+
+			String str = JSONObject.toJSONString(map);
+			response.getWriter().write(str);
+
+		} catch (FileUploadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	private void dofindAllBanar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// page：页码，起始值 1。 rows：每页显示行。 page为前台要查询的页，rows为前台的每页记录数
+		int rows = Integer.parseInt(request.getParameter("rows"));
+		// System.out.println(rows);
+		int page = Integer.parseInt(request.getParameter("page"));
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> pageMap = new HashMap<String, Object>();
+		pageMap.put("startPage", (page - 1) * rows);
+		pageMap.put("endPage", rows);
+
+		// 调用Service方法
+		BanarService banarService = BanarServiceImpl.getInstance();
+		List<Banar> list = banarService.findAllBanar(pageMap);
+		// System.out.println(list.size());
+		int total = banarService.banarCount();
+
+		// JSON中，total记录总数，rows记录。total为后台返回的（数据库的）总记录数，（第二个）rows为后台返回的json对象数组。
+		map.put("rows", list);
+		map.put("total", total);
+		String str = JSONObject.toJSONString(map);
+		// System.out.println(map.toString());
+		response.getWriter().write(str);
+
+		/*
+		 * //获取session HttpSession se = request.getSession(); // 调用Service方法
+		 * BanarService banarService = BanarServiceImpl.getInstance();
+		 * List<Banar> banars = null; // 查询所有用户 banars =
+		 * banarService.findAllBanar(); if(banars != null) { //
+		 * System.out.println(banars.size()); se.setAttribute("banarList",
+		 * banars); response.sendRedirect(request.getContextPath() +
+		 * "/Admin/banar.jsp");
+		 * 
+		 * }
+		 */
 	}
 
 }

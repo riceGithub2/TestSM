@@ -73,7 +73,7 @@
 		</thead>
 	</table>
 	<div id="message_toolbar">
-		 <ahref="javascript:void(0)" class="easyui-linkbutton"
+		 <a href="javascript:void(0)" class="easyui-linkbutton"
 			iconCls="icon-remove" plain="true" onclick="destroyMessage()">删除</a>
 	</div>
 

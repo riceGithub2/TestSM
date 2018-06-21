@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>lvcityBG</display-name>
   <welcome-file-list>
-    <welcome-file>userindex.jsp</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>
@@ -24,6 +24,8 @@
     <servlet-name>BanarServlet</servlet-name>
     <url-pattern>/Admin/Banar</url-pattern>
   </servlet-mapping>
+  
+    <!-- 配置静态资源可以直接访问 -->
   <servlet>
     <servlet-name>default</servlet-name>
     <servlet-class>
@@ -36,5 +38,27 @@
     <url-pattern>*.css</url-pattern>
     <url-pattern>*.jpg</url-pattern>
     <url-pattern>*.png</url-pattern>
+     <url-pattern>*.html</url-pattern>
+     <url-pattern>*.gif</url-pattern>
   </servlet-mapping>
+  
+  	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>com.neuedu.lvcity.filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+  
+  
+  <filter>
+		<filter-name>SetCharacterEncodingFilter</filter-name>
+		<filter-class>com.neuedu.lvcity.filter.SetCharacterEncodingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SetCharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 </web-app>

@@ -5,7 +5,7 @@
 	type="javax.sql.DataSource"
 	username="root"
 	password=""
-	url="jdbc:mysql://localhost:3306/ssmdb"
+	url="jdbc:mysql://localhost:3306/lvcitydb"
 	driverClassName="com.mysql.jdbc.Driver "
 	maxIdle="2"
 	maxWait="5000"

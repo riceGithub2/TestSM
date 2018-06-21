@@ -28,14 +28,17 @@
 	src="jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js"></script>
 	
 </head>
-<body>
-  <!--  <% out.print(basePath); %>-->
+<body class="easyui-layout" data-options="fit:true">
+ <div data-options="fit:true" style="height:500px">
+  <!--  <% out.print(basePath); %>
   <%  HttpSession se = request.getSession();
-      List banarList = (List)se.getAttribute("banarList"); %>
+      List banarList = (List)se.getAttribute("banarList"); %>-->
+      
+       <!-- 显示数据记录的banar_dg ，使用easyui的easyui-datagrid-->
 	<table id="banar_dg" class="easyui-datagrid" style="height: 670px;"
-		url="banar/findAllBanar.do" toolbar="#banar_toolbar" pagination="true"
-		rownumbers="true" fitColumns="true" singleSelect="true"
-		data-options="fit:false,border:false,pageSize:20,pageList:[5,10,15,20]">
+		url="Admin/Banar?action=findAllBanar" toolbar="#banar_toolbar" pagination="true" 
+		rownumbers="true" fitColumns="true" singleSelect="true" 
+		data-options="fit:true,border:false,pageSize:20,pageList:[5,10,15,20]">
 		<thead>
 			<tr>
 				<th field="banarid" width="50">编号</th>
@@ -43,7 +46,7 @@
 				<th field="state" width="50">状态</th>
 			</tr>			
 		</thead>	
-		<c:if test="${!empty banarList }">
+	<%-- 	<c:if test="${!empty banarList }">
 				<c:forEach items="${banarList}" var="banar">
 					<tr>
 						<td>${banar.banarid }</td>
@@ -51,8 +54,10 @@
 						<td>${banar.state }</td>	
 					</tr>				
 				</c:forEach>
-			</c:if>			
+			</c:if>	 --%>		
 	</table>
+</div>
+ <!-- 工具栏banar_toolba，使用easyui的easyui-linkbutton -->
 	<div id="banar_toolbar">
 		<a href="javascript:void(0)" class="easyui-linkbutton"
 			iconCls="icon-add" plain="true" onclick="addBanar()">新增</a> <a
@@ -61,7 +66,7 @@
 			href="javascript:void(0)" class="easyui-linkbutton"
 			iconCls="icon-remove" plain="true" onclick="destroyBanar()">删除</a>
 	</div>
-	
+	<!-- 点新增按钮打开的上传图片的对话框banar_dlg，使用easyui的easyui-dialog -->
 	<div id="banar_dlg" class="easyui-dialog" style="padding: 10px 20px"
 		closed="true" buttons="#contact_dlg-buttons">
 		<form id="banar_fm" method="post" novalidate enctype="multipart/form-data">
@@ -77,13 +82,7 @@
 			</div>
 			
 		    <script type="text/javascript">            
-	            //判断浏览器是否支持FileReader接口
-	            if (typeof FileReader == 'undefined') {
-	                document.getElementById("xmTanDiv").InnerHTML = "<h1>当前浏览器不支持FileReader接口</h1>";
-	                //使选择控件不可操作
-	                document.getElementById("xdaTanFileImg").setAttribute("disabled", "disabled");
-	            }
-	
+	          
 	            //选择图片，马上预览
 	            function xmTanUploadImg(obj) {
 	                var file = obj.files[0];
@@ -127,7 +126,7 @@
 			<a href="javascript:void(0)" class="easyui-linkbutton c6"
 				iconCls="icon-ok" onclick="saveBanar()" style="width: 90px">保存</a> 
 			<a href="javascript:void(0)" class="easyui-linkbutton"
-				iconCls="icon-cancel" onclick="javascript:$('#contact_dlg').dialog('close')"
+				iconCls="icon-cancel" onclick="javascript:$('#banar_dlg').dialog('close')"
 				style="width: 90px; float: right;">取消</a>
 		</div>
 	</div>

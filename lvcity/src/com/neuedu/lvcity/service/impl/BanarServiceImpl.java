@@ -5,16 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.neuedu.lvcity.common.DBUtils;
-import com.neuedu.lvcity.common.ServiceException;
 import com.neuedu.lvcity.dao.BanarDao;
-import com.neuedu.lvcity.dao.UserDao;
 import com.neuedu.lvcity.dao.impl.BanarDaoImpl;
-import com.neuedu.lvcity.dao.impl.UserDaoImpl;
 import com.neuedu.lvcity.model.Banar;
-import com.neuedu.lvcity.model.Users;
 import com.neuedu.lvcity.service.BanarService;
-import com.neuedu.lvcity.service.UsersService;
-
 
 public class BanarServiceImpl implements BanarService{
 	
@@ -40,12 +34,31 @@ public class BanarServiceImpl implements BanarService{
 
 	@Override
 	public int banarCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		//声明数据库连接对象，用于保存数据库连接对象
+		Connection conn = null;
+		//声明变量，用于保存数据库查询结果
+		int result = 0;
+		try{
+			//调用数据库工具类的getConnection方法，取得数据库连接对象，并赋值给数据库连接对象变量
+			conn = DBUtils.getConnection();
+			//创建userDao的实现类对象
+			BanarDao banarDao = new BanarDaoImpl(conn);
+			
+			//调用dao中的banarCount方法，进行数据库查询操作，结果赋值给查询结果变量
+			result = banarDao.banarCount();	
+		
+		} catch (Exception e) {
+			System.out.println("查询统计所有banar错误"+e.getMessage());
+		} finally {
+			//调用数据库工具类的closeConnection方法，关闭连接
+			DBUtils.closeConnection(conn);
+		}
+		//返回数据库查询结果
+		return result;
 	}
 
 	@Override
-	public List<Banar> findAllBanar() {
+	public List<Banar> findAllBanar(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 				//声明数据库连接对象，用于保存数据库连接对象
 						Connection conn = null;
@@ -57,11 +70,10 @@ public class BanarServiceImpl implements BanarService{
 							//创建userDao的实现类对象
 							BanarDao banarDao = new BanarDaoImpl(conn);
 							//调用dao中的selectAll方法，进行数据库查询操作，结果赋值给查询结果变量
-							banars = banarDao.findAllBanar();			
+							banars = banarDao.findAllBanar(map);			
 						
 						} catch (Exception e) {
-							//将异常封装成自定义异常并抛出
-							throw new ServiceException("查询所有banar错误", e);
+							System.out.println("查询所有banar错误"+e.getMessage());
 						} finally {
 							//调用数据库工具类的closeConnection方法，关闭连接
 							DBUtils.closeConnection(conn);
@@ -86,8 +98,7 @@ public class BanarServiceImpl implements BanarService{
 			result = BanarDao.addBanar(imagePath);			
 		    DBUtils.commit(conn);
 		} catch (Exception e) {
-			//将异常封装成自定义异常并抛出
-			throw new ServiceException("增加banar错误", e);
+			System.out.println("增加banar错误"+e.getMessage());
 		} finally {
 			//调用数据库工具类的closeConnection方法，关闭连接
 			DBUtils.closeConnection(conn);
@@ -118,8 +129,7 @@ public class BanarServiceImpl implements BanarService{
 					result = BanarDao.deleteBanar(banar);
 				    DBUtils.commit(conn);
 				} catch (Exception e) {
-					//将异常封装成自定义异常并抛出
-					throw new ServiceException("删除banar错误", e);
+					System.out.println("删除banar错误"+e.getMessage());
 				} finally {
 					//调用数据库工具类的closeConnection方法，关闭连接
 					DBUtils.closeConnection(conn);
